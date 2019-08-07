@@ -5,6 +5,7 @@ const initialState = {
   orders: [],
   loading: false,
   purchased: false,
+  error: null,
 };
 
 const purchaseInit = (state, action) => {
@@ -20,7 +21,8 @@ const purchaseBurgerSuccess = (state, action) => {
   return updateObject(state, {
     purchased: true,
     loading: false,
-    orders: state.orders.concat(newOrder)
+    orders: state.orders.concat(newOrder),
+    error: null,
   });
 };
 
@@ -37,7 +39,7 @@ const fetchOrdersSuccess = (state, action) => {
 };
 
 const fetchOrdersFail = (state, action) => {
-  return updateObject(state, {loading: false});
+  return updateObject(state, {loading: false, error: action.error});
 };
 
 const reducer = (state = initialState, action) => {
